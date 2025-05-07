@@ -9,8 +9,8 @@ It provides a bridge between .NET applications and the Vantage6 platform for fed
 
 - Connection to a Vantage6 central server
 - Authentication with username and password
-- End-to-End encryption support (given that the server requires it, and organisation Key code is provided)
-- Multi-Factor Authentication (MFA) support (given that the server requires it, and an MFA code is provided)
+- End-to-End encryption support (given that the Vantage6 server requires it, and organisation Key code is provided)
+- Multi-Factor Authentication (MFA) support (given that the Vantage6 server requires it, and an MFA code is provided)
 - Creation and management of tasks
 - Task result monitoring and retrieval
 
