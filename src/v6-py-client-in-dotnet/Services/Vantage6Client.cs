@@ -31,6 +31,10 @@ public class Vantage6Client : IVantage6Client
                 }
 
                 _client.authenticate(_options.Username, _options.Password);
+                if (_options.OrganizationKey != string.Empty)
+                {
+                    _client.setup_encryption(_options.OrganizationKey);
+                }
                 return Task.FromResult(true);
             }
         }
