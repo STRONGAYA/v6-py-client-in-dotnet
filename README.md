@@ -75,3 +75,8 @@ The application includes built-in error handling for:
 - Connection issues
 - Authentication errors
 - Python runtime errors
+
+## Contributors
+- J. Hogenboom
+- R. Carter
+- V. Gouthamchand
