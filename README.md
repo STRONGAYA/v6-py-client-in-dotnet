@@ -9,7 +9,8 @@ It provides a bridge between .NET applications and the Vantage6 platform for fed
 
 - Connection to a Vantage6 central server
 - Authentication with username and password
-- End-to-End encryption support
+- End-to-End encryption support (given that the server requires it, and organisation Key code is provided)
+- Multi-Factor Authentication (MFA) support (given that the server requires it, and an MFA code is provided)
 - Creation and management of tasks
 - Task result monitoring and retrieval
 
@@ -31,9 +32,10 @@ The application utilises `appsettings.json` for configuration. Complete the file
     "Port": 443,
     "Username": "JanJanssen",
     "Password": "NotSoSecret",
+    "MfaCode": "1A2B3C4D5E",
     "ApiPath": "/api",
     "PythonHome": "C:\\Users\\Jan\\AppData\\Local\\Programs\\Python\\Python310",
-    "OrganizationKey": "C:\\Users\\Jan\\Documents\\Vantage6\\OrganizationKey.pem",
+    "OrganizationKey": "C:\\Users\\Jan\\Documents\\Vantage6\\OrganisationKey.pem",
     "DefaultCollaborationId": 1,
     "DefaultOrganizationIds": [
       1

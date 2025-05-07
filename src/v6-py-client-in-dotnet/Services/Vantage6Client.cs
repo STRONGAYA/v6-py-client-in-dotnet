@@ -8,6 +8,7 @@ public class Vantage6Client : IVantage6Client
 {
     private readonly Vantage6Options _options;
     private readonly IPythonEnvironmentManager _pythonEnv;
+    private readonly MfaHelper _mfaHelper;
     private dynamic? _client;
 
     public Vantage6Client(
@@ -16,6 +17,7 @@ public class Vantage6Client : IVantage6Client
     {
         _options = options.Value;
         _pythonEnv = pythonEnv;
+        _mfaHelper = new MfaHelper(_options.MfaKey);
     }
 
     public Task<bool> ConnectAsync()
@@ -30,7 +32,20 @@ public class Vantage6Client : IVantage6Client
                     _client = vantage6.Client(_options.Host, _options.Port, _options.ApiPath);
                 }
 
-                _client.authenticate(_options.Username, _options.Password);
+                // Generate MFA code if configured
+                var mfaCode = _mfaHelper.GenerateMfaCode();
+
+                // Authenticate with or without MFA
+                if (!string.IsNullOrEmpty(mfaCode))
+                {
+                    _client.authenticate(_options.Username, _options.Password, mfaCode);
+                }
+                else
+                {
+                    _client.authenticate(_options.Username, _options.Password);
+                }
+
+                // Set up end-to-end encryption if an organization key is provided
                 if (_options.OrganizationKey != string.Empty)
                 {
                     _client.setup_encryption(_options.OrganizationKey);
