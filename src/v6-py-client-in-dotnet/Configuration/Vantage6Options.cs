@@ -11,4 +11,6 @@ public class Vantage6Options
     public string OrganizationKey { get; set; } = string.Empty;
     public int DefaultCollaborationId { get; set; }
     public int[] DefaultOrganizationIds { get; set; } = Array.Empty<int>();
+    
+    public string Vantage6Version { get; set; } = string.Empty;
 }

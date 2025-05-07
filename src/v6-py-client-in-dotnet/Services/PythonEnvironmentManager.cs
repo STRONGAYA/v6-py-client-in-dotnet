@@ -10,6 +10,7 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
     private readonly string _pythonHome;
     private readonly string _venvPath;
     private readonly string _pythonDll;
+    private readonly string _vantage6Version;
     private bool _isInitialized;
 
     public bool IsInitialized => _isInitialized;
@@ -22,6 +23,7 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
         _pythonHome = options.Value.PythonHome;
         _venvPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".venv");
         _pythonDll = Path.Combine(_pythonHome, "python310.dll");
+        _vantage6Version = options.Value.Vantage6Version;
     }
 
     public void Initialize()
@@ -193,7 +195,13 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
 
         var pipPath = Path.Combine(venvPath, "Scripts", "pip.exe");
         Console.WriteLine("\nInstalling vantage6...");
-        RunProcess(pipPath, "install vantage6");
+        
+        // If version is null or empty, install latest version
+        var installCommand = string.IsNullOrWhiteSpace(_vantage6Version) 
+            ? "-m pip install vantage6"
+            : $"-m pip install vantage6=={_vantage6Version}";
+    
+        RunProcess(pythonExe, installCommand);
     }
 
     private void RunProcess(string fileName, string arguments)
