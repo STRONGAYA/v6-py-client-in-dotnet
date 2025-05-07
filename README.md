@@ -16,7 +16,7 @@ It provides a bridge between .NET applications and the Vantage6 platform for fed
 ## Prerequisites
 
 - .NET 8.0
-- Python (version 3.10 - 3.12, _developed and tested in Python 3.10_)
+- Python (version 3.10–3.12, _developed and tested in Python 3.10_)
 - Python venv (this is normally included with Python installations)
 
 _All other dependencies are installed through the application._
