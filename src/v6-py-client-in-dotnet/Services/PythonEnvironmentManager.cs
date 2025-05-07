@@ -16,6 +16,9 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
 
     public PythonEnvironmentManager(IOptions<Vantage6Options> options)
     {
+        ValidatePaths(options.Value.PythonHome,
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory));
+
         _pythonHome = options.Value.PythonHome;
         _venvPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".venv");
         _pythonDll = Path.Combine(_pythonHome, "python310.dll");
@@ -33,6 +36,38 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
         catch (Exception ex)
         {
             throw new InvalidOperationException("Failed to initialize Python environment", ex);
+        }
+    }
+
+    private void ValidatePaths(string pythonHome, string baseDir)
+    {
+        var issues = new List<string>();
+
+        if (string.IsNullOrWhiteSpace(pythonHome))
+        {
+            issues.Add("Python home path is not configured. Please set it in appsettings.json.");
+        }
+        else if (pythonHome.Contains(" "))
+        {
+            issues.Add(
+                $"Python home path '{pythonHome}' contains spaces. Please install Python in a path without spaces.");
+        }
+
+        if (baseDir.Contains(" "))
+        {
+            issues.Add(
+                $"Application base directory '{baseDir}' contains spaces. Please move the application to a path without spaces.");
+        }
+
+        if (issues.Any())
+        {
+            var message = "Path validation failed:\n" + string.Join("\n", issues) +
+                          "\n\nTo resolve these issues:\n" +
+                          "1. Install Python in a directory without spaces (e.g., 'C:\\Python310' instead of 'C:\\Program Files\\Python 3.10')\n" +
+                          "2. Place this application in a directory without spaces\n" +
+                          "3. Update the PythonHome setting in appsettings.json accordingly";
+
+            throw new InvalidOperationException(message);
         }
     }
 
@@ -77,6 +112,7 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
         {
             throw new InvalidOperationException("Failed to start Python process");
         }
+
         string output = process.StandardOutput.ReadToEnd();
         string error = process.StandardError.ReadToEnd();
         process.WaitForExit();
@@ -85,6 +121,7 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
         {
             throw new Exception($"Failed to create virtual environment. Error: {error}");
         }
+
         if (!string.IsNullOrWhiteSpace(output))
         {
             Console.WriteLine(output);
@@ -102,9 +139,9 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
 
         Environment.SetEnvironmentVariable("PYTHONHOME", _pythonHome);
         Environment.SetEnvironmentVariable("VIRTUAL_ENV", _venvPath);
-        
+
         var pythonPath = $"{sitePackages};{venvLib};{venvScripts};{venvDlls};" +
-                        $"{pythonLib};{pythonDlls};{_pythonHome}";
+                         $"{pythonLib};{pythonDlls};{_pythonHome}";
         Environment.SetEnvironmentVariable("PYTHONPATH", pythonPath);
 
         var currentPath = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
@@ -150,7 +187,7 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
     private void InstallRequirements(string venvPath)
     {
         var pythonExe = Path.Combine(venvPath, "Scripts", "python.exe");
-        
+
         Console.WriteLine("Upgrading pip...");
         RunProcess(pythonExe, "-m pip install --upgrade pip");
 
@@ -176,6 +213,7 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
         {
             throw new InvalidOperationException($"Failed to start process: {fileName}");
         }
+
         string output = process.StandardOutput.ReadToEnd();
         string error = process.StandardError.ReadToEnd();
         process.WaitForExit();
@@ -184,6 +222,7 @@ public class PythonEnvironmentManager : IPythonEnvironmentManager
         {
             throw new Exception($"Process failed. Error: {error}\nOutput: {output}");
         }
+
         Console.WriteLine(output);
     }
 
