@@ -1,0 +1,12 @@
+{
+  "name": "default-test-average-task",
+  "description": "Test average task",
+  "databaseLabels": "default",
+  "image": "harbor2.vantage6.ai/demo/average",
+  "input": {
+    "method": "central_average",
+    "kwargs": {
+      "column_name": "Age"
+    }
+  }
+}
