@@ -73,11 +73,13 @@ Ensure that the following JSON file adheres to the following structure:
     "kwargs": {
       "algorithm_relevant_input_parameter_1": "relevant_value_1"
     }
-  }
+  },
+  "algorithm_repository": "https://github.com/your-organisation/your-algorithm-repository", 
+  "algorithm_wiki": "https://github.com/your-organisation/your-algorithm-repository/something-to-guide-users"
 }
 ```
 
-Additionally, there is an example that retrieves the average of 'Age' in `/examples/algorithm_input/average_age.json`.
+Additionally, there is an example that retrieves the average of 'Age' in `/examples/algorithm_input/general/average_age.json`.
 
 ## Usage
 

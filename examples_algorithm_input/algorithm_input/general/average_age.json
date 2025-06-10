@@ -8,5 +8,7 @@
     "kwargs": {
       "column_name": "Age"
     }
-  }
+  },
+  "algorithm_repository": "https://github.com/IKNL/v6-average-py",
+  "algorithm_wiki": "not available"
 }
