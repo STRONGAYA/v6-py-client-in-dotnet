@@ -1,0 +1,68 @@
+{
+  "name": "EORTC QLQ-C30 scores descriptive statistics",
+  "description": "Task to score and take the descriptive statistics for EORTC QLQ-C30 functioning and symptom scales.",
+  "databaseLabels": "rdf-store",
+  "image": "medicaldataworks.azurecr.io/strongaya/v6-eortc-qlq-scoring",
+  "input": {
+    "method": "central",
+    "kwargs": {
+      "items_to_score": {
+        "items_to_score": {
+          "C30": {
+            "domains_to_score": [
+              "QL2",
+              "PF2",
+              "RF2",
+              "EF",
+              "CF",
+              "SF",
+              "FA",
+              "NV",
+              "PA",
+              "DY",
+              "SL",
+              "AP",
+              "CO",
+              "DI",
+              "FI"
+            ],
+            "variable_info": {
+              "question_1": "ncit:C104279",
+              "question_2": "ncit:C104281",
+              "question_3": "ncit:C104282",
+              "question_4": "ncit:C104283",
+              "question_5": "ncit:C104284",
+              "question_6": "ncit:C104285",
+              "question_7": "ncit:C104286",
+              "question_8": "ncit:C99773",
+              "question_9": "ncit:C91126",
+              "question_10": "ncit:C104293",
+              "question_11": "ncit:C104294",
+              "question_12": "ncit:C104295",
+              "question_13": "ncit:C104296",
+              "question_14": "ncit:C91124",
+              "question_15": "ncit:C104298",
+              "question_16": "ncit:C104299",
+              "question_17": "ncit:C104300",
+              "question_18": "ncit:C104301",
+              "question_19": "ncit:C99785",
+              "question_20": "ncit:C104307",
+              "question_21": "ncit:C104302",
+              "question_22": "ncit:C104304",
+              "question_23": "ncit:C104308",
+              "question_24": "ncit:C104309",
+              "question_25": "ncit:C99795",
+              "question_26": "ncit:C104310",
+              "question_27": "ncit:C104311",
+              "question_28": "ncit:C104312",
+              "question_29": "ncit:C104313",
+              "question_30": "ncit:C104314"
+            }
+          }
+        }
+      }
+    },
+    "algorithm_repository": "https://github.com/STRONGAYA/v6-eortc-qlq-scoring",
+    "algorithm_wiki": "https://github.com/STRONGAYA/v6-eortc-qlq-scoring/wiki"
+  }
+}

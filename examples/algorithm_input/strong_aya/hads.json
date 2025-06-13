@@ -1,0 +1,37 @@
+{
+  "name": "HADS scores descriptive statistics",
+  "description": "Task to score and take the descriptive statistics for HADS anxiety and depression scales.",
+  "databaseLabels": "rdf-store",
+  "image": "medicaldataworks.azurecr.io/strongaya/v6-hads-scoring",
+  "input": {
+    "method": "central",
+    "kwargs": {
+      "items_to_score": {
+        "items_to_score": {
+          "scale_to_score": [
+            "anxiety",
+            "depression"
+          ],
+          "variable_info": {
+            "question_1": "ncit:C104302",
+            "question_2": "ncit:C114635",
+            "question_3": "ncit:C114636",
+            "question_4": "ncit:C114637",
+            "question_5": "ncit:C114638",
+            "question_6": "ncit:C114639",
+            "question_7": "ncit:C114640",
+            "question_8": "ncit:C114668",
+            "question_9": "ncit:C114669",
+            "question_10": "ncit:C114670",
+            "question_11": "ncit:C114671",
+            "question_12": "ncit:C114674",
+            "question_13": "ncit:C114676",
+            "question_14": "ncit:C114677"
+          }
+        }
+      }
+    },
+    "algorithm_repository": "https://github.com/STRONGAYA/v6-hads-scoring",
+    "algorithm_wiki": "https://github.com/STRONGAYA/v6-hads-scoring/wiki"
+  }
+}
